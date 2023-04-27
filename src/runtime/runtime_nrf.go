@@ -20,6 +20,7 @@ func main() {
 	if nrf.FPUPresent {
 		arm.SCB.CPACR.Set(0) // disable FPU if it is enabled
 	}
+	machine.InitSerial()
 	systemInit()
 	preinit()
 	run()
@@ -27,7 +28,6 @@ func main() {
 }
 
 func init() {
-	machine.InitSerial()
 	initLFCLK()
 	initRTC()
 }

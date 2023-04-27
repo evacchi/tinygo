@@ -57,10 +57,10 @@ jobs:
         run: (cd drivers; make smoke-test XTENSA=0 | tee sizes-pr.txt)
 
       # Compute sizes for the dev branch
+      - name: Pull other branches
+        run: git fetch --recurse-submodules=no origin
       - name: Checkout dev branch
-        run: |
-          git fetch origin
-          git checkout `git merge-base HEAD origin/dev`
+        run: git checkout --no-recurse-submodules `git merge-base HEAD origin/dev`
       - name: Build tinygo binary for the dev branch
         run: go install
       - name: Determine binary sizes on the dev branch
